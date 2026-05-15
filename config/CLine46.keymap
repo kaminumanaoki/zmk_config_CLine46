@@ -49,72 +49,133 @@
     keymap {
         compatible = "zmk,keymap";
 
+        // ================================================================
+        // Layer 0: Base
+        //
+        // 左手:
+        //   Row0: Tab   Q    W    E    R    T
+        //   Row1: *Ctrl A    S    D    F    G
+        //   Row2: *Shft Z    X    C    V    B
+        //
+        // 右手:
+        //   Row0: Y     U    I    O    P    - _
+        //   Row1: H     J    K    L    : ;  " '
+        //   Row2: N     M    < ,  > .  ? /  | \
+        //
+        // Thumb:
+        //   左: [余] *Alt  *Win  Lang2→L1  Space→L2  Lang1→L3
+        //   右: BS   Enter→L1  Esc→L3  [余]
+        // ================================================================
         default_layer {
             bindings = <
-&kp TAB      &kp Q     &kp W      &kp E     &kp R                &kp T                                            &kp Y     &kp U   &kp I       &kp O          &kp P       &kp LEFT_BRACKET
-&kp LCTRL    &kp A     &kp S      &kp D     &kp F                &kp G                                            &kp H     &kp J   &kp K       &kp L          &kp MINUS   &kp RIGHT_BRACKET
-&kp LSHIFT   &kp Z     &kp X      &kp C     &kp V                &kp B                                            &kp N     &kp M   &kp COMMA   &kp DOT        &mo 3       &kp RSHIFT
-             &kp ESC   &kp LGUI   &kp LALT  &lt 2 INT_MUHENKAN   &lt 1 SPACE   &mt LSFT INT_HENKAN      &kp RET   &kp BSPC                      &kp NUMBER_9   &kp DEL  
+&kp TAB    &kp Q    &kp W    &kp E    &kp R              &kp T                                                    &kp Y    &kp U    &kp I      &kp O    &kp P      &kp MINUS
+&kp LCTRL  &kp A    &kp S    &kp D    &kp F              &kp G                                                    &kp H    &kp J    &kp K      &kp L    &kp SEMI   &kp SQT
+&kp LSHFT  &kp Z    &kp X    &kp C    &kp V              &kp B                                                    &kp N    &kp M    &kp COMMA  &kp DOT  &kp SLASH  &kp BSLH
+           &trans   &kp LALT &kp LGUI &lt 1 INT_MUHENKAN &lt 2 SPACE  &lt 3 INT_HENKAN    &kp BSPC  &lt 1 RET  &lt 3 ESC  &trans
             >;
         };
 
-        
+        // ================================================================
+        // Layer 1: Nav / Window操作
+        // Lang2(無変換)ホールド / Enterホールドで起動
+        //
+        // 左手:
+        //   Row0: ▽     F1       A+W+↑    A+W+↓    A+W+←    A+W+→
+        //   Row1: ▽     Ctrl+G   Alt+↑    Alt+↓    Win+←    Win+→
+        //   Row2: ▽     Alt+F12  ←        ↓        Alt+←    Alt+→
+        //
+        // 右手:
+        //   Row0: Win+]  C+A+Enter  C+A+←   C+A+→   C+A+↑    C+A+↓
+        //   Row1: Win+[  MB1        ↑        MB2      S+Win+4  C+Win+Q
+        //   Row2: Ctrl+↑ ←          ↓        →        ▽        ▽
+        //
+        // Thumb: 全て▽
+        //
+        // 凡例:
+        //   LA(LG(X)) = Alt+Win+X
+        //   LG(X)     = Win+X
+        //   LC(LA(X)) = Ctrl+Alt+X
+        //   LA(X)     = Alt+X
+        //   LS(LG(X)) = Shift+Win+X
+        //   LC(LG(X)) = Ctrl+Win+X
+        // ================================================================
         layer_1 {
             bindings = <
-&kp CARET   &kp EQUAL      &kp NUMBER_7   &kp NUMBER_8   &kp NUMBER_9   &kp AT_SIGN                            &kp LEFT_PARENTHESIS    &kp DOUBLE_QUOTES   &kp RIGHT_PARENTHESIS   &kp SEMI    &kp EXCLAMATION   &kp QMARK
-&kp MINUS   &kp PLUS       &kp NUMBER_4   &kp NUMBER_5   &kp NUMBER_6   &kp HASH                               &kp LEFT_BRACKET        &kp SINGLE_QUOTE    &kp RIGHT_BRACKET       &kp COLON   &kp AMPERSAND     &kp PIPE
-&kp SLASH   &kp ASTERISK   &kp NUMBER_1   &kp NUMBER_2   &kp NUMBER_3   &kp UNDERSCORE                         &kp SLASH               &kp BACKSLASH       &kp COMMA               &kp DOT     &kp DOLLAR        &kp PERCENT
-            &kp ESC        &kp NUMBER_0   &kp DOT        &trans         &trans           &trans      &kp RET   &kp BSPC                                                            &kp DEL     &trans 
+&trans  &kp F1       &kp LA(LG(UP))  &kp LA(LG(DOWN))  &kp LA(LG(LEFT))  &kp LA(LG(RIGHT))                      &kp LG(RBKT)   &kp LC(LA(RET))  &kp LC(LA(LEFT))  &kp LC(LA(RIGHT))  &kp LC(LA(UP))   &kp LC(LA(DOWN))
+&trans  &kp LC(G)    &kp LA(UP)      &kp LA(DOWN)       &kp LG(LEFT)      &kp LG(RIGHT)                          &kp LG(LBKT)   &mkp MB1         &kp UP            &mkp MB2           &kp LS(LG(N4))   &kp LC(LG(Q))
+&trans  &kp LA(F12)  &kp LEFT        &kp DOWN           &kp LA(LEFT)      &kp LA(RIGHT)                          &kp LC(UP)     &kp LEFT         &kp DOWN          &kp RIGHT          &trans           &trans
+        &trans       &trans          &trans             &trans             &trans          &trans    &trans  &trans  &trans  &trans
             >;
         };
 
-
+        // ================================================================
+        // Layer 2: Symbol / Number
+        // Space ホールドで起動
+        //
+        // 左手 (記号メイン):
+        //   Row0: ▽   -    #    @    !    +
+        //   Row1: ▽   !    $    %    ^    +
+        //   Row2: ▽   _    &    *    (    )
+        //
+        // 右手 (数字・対応記号):
+        //   Row0: <,   1    2    3    [    ]
+        //   Row1: >.   4    5    6    {    }
+        //   Row2: 0    7    8    9    /    `
+        //
+        // Thumb:
+        //   左: [余] ▽ ▽ ▽ ▽ ▽
+        //   右: BS  ▽  ▽  ▽  [余]
+        // ================================================================
         MOUSE {
             bindings = <
-&trans   &trans   &kp F7   &kp F8   &kp F9   &kp F10                         &kp LC(Y)   &kp LC(C)        &kp LC(V)        &kp LC(X)         &kp LC(P)   &trans
-&trans   &trans   &kp F4   &kp F5   &kp F6   &kp F11                         &kp LC(Z)   &mkp MB1         &kp UP_ARROW     &mkp MB2          &kp LC(F)   &trans
-&trans   &trans   &kp F1   &kp F2   &kp F3   &kp F12                         &kp LC(A)   &kp LEFT_ARROW   &kp DOWN_ARROW   &kp RIGHT_ARROW   &trans      &trans
-         &trans   &trans   &trans   &trans   &trans    &trans      &kp RET   &kp BSPC                                      &kp HOME          &kp END
+&trans  &kp MINUS      &kp LS(N3)    &kp LS(N2)    &kp LS(N1)    &kp LS(EQUAL)                             &kp LS(COMMA)  &kp N1  &kp N2  &kp N3  &kp LBKT      &kp RBKT
+&trans  &kp LS(N1)     &kp LS(N4)    &kp LS(N5)    &kp LS(N6)    &kp LS(EQUAL)                             &kp LS(DOT)    &kp N4  &kp N5  &kp N6  &kp LS(LBKT)  &kp LS(RBKT)
+&trans  &kp LS(MINUS)  &kp LS(N7)    &kp LS(N8)    &kp LS(N9)    &kp LS(N0)                                &kp N0         &kp N7  &kp N8  &kp N9  &kp SLASH     &kp GRAVE
+        &trans         &trans        &trans         &trans         &trans         &trans    &kp BSPC  &trans  &trans  &trans
             >;
         };
 
-
+        // ================================================================
+        // Layer 3: BT / System
+        // Lang1(変換)ホールド / Escホールドで起動
+        //
+        // Keyball44 Layer3はRGB操作でしたが、CLine46はRGB非搭載のため
+        // BTプロファイル切り替えに置き換え
+        // studio_unlock をThumb右に配置
+        // ================================================================
         SCROLL {
             bindings = <
-&bt BT_CLR       &trans   &trans         &trans         &trans         &trans                                &trans   &trans   &trans   &trans   &trans   &trans
-&bt BT_CLR_ALL   &trans   &bt BT_SEL 4   &trans         &trans         &trans                                &trans   &trans   &trans   &trans   &trans   &trans
-&trans           &trans   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &trans                                &trans   &trans   &trans   &trans   &trans   &trans
-                 &trans   &bt BT_SEL 0   &trans         &trans         &trans   &trans      &studio_unlock   &trans                     &trans   &trans  
+&bt BT_CLR      &trans  &trans        &trans        &trans        &trans                                &trans  &trans  &trans  &trans  &trans  &trans
+&bt BT_CLR_ALL  &trans  &bt BT_SEL 4  &trans        &trans        &trans                                &trans  &trans  &trans  &trans  &trans  &trans
+&trans          &trans  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &trans                                &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &bt BT_SEL 0  &trans        &trans        &trans  &trans    &studio_unlock  &trans  &trans  &trans
             >;
         };
-
 
         layer_4 {
             bindings = <
-&trans   &trans   &trans         &trans         &trans         &trans                        &trans   &trans   &trans   &trans   &trans   &trans
-&trans   &trans   &bt BT_SEL 4   &trans         &trans         &trans                        &trans   &trans   &trans   &trans   &trans   &trans
-&trans   &trans   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &trans                        &trans   &trans   &trans   &trans   &trans   &trans
-         &trans   &bt BT_SEL 0   &trans         &trans         &trans   &trans      &trans   &trans                     &trans   &trans 
+&trans  &trans  &trans        &trans        &trans        &trans                        &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &bt BT_SEL 4  &trans        &trans        &trans                        &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &trans                        &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &bt BT_SEL 0  &trans        &trans        &trans  &trans      &trans  &trans  &trans  &trans
             >;
         };
-
 
         layer_5 {
             bindings = <
-&trans   &trans   &trans   &trans   &trans   &trans                        &trans   &trans   &trans   &trans   &trans   &trans
-&trans   &trans   &trans   &trans   &trans   &trans                        &trans   &trans   &trans   &trans   &trans   &trans
-&trans   &trans   &trans   &trans   &trans   &trans                        &trans   &trans   &trans   &trans   &trans   &trans
-         &trans   &trans   &trans   &trans   &trans   &trans      &trans   &trans                     &trans   &trans       
+&trans  &trans  &trans  &trans  &trans  &trans                        &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                        &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                        &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans
             >;
         };
 
-
         layer_6 {
             bindings = <
-&trans   &trans   &trans   &trans   &trans   &trans                        &trans   &trans   &trans   &trans   &trans   &trans
-&trans   &trans   &trans   &trans   &trans   &trans                        &trans   &trans   &trans   &trans   &trans   &trans
-&trans   &trans   &trans   &trans   &trans   &trans                        &trans   &trans   &trans   &trans   &trans   &trans
-         &trans   &trans   &trans   &trans   &trans   &trans      &trans   &trans                     &trans   &trans 
+&trans  &trans  &trans  &trans  &trans  &trans                        &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                        &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                        &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans
             >;
         };
     };
