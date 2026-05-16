@@ -63,15 +63,15 @@
         //   Row2: N     M    < ,  > .  ? /  | \
         //
         // Thumb:
-        //   左: [余] *Alt  *Win  英数→L1   Space→L2  かな→L3
-        //   右: BS   Enter→L1  Esc→L3  [余]
+        //   左: Ctrl  *Alt  *Win  英数→L1   Space→L2  かな→L3
+        //   右: BS   Enter→L1  Esc  L3(mo)
         // ================================================================
         default_layer {
             bindings = <
 &kp TAB    &kp Q    &kp W    &kp E    &kp R              &kp T                                                    &kp Y    &kp U    &kp I      &kp O    &kp P      &kp MINUS
 &kp LCTRL  &kp A    &kp S    &kp D    &kp F              &kp G                                                    &kp H    &kp J    &kp K      &kp L    &kp SEMI   &kp SQT
 &kp LSHFT  &kp Z    &kp X    &kp C    &kp V              &kp B                                                    &kp N    &kp M    &kp COMMA  &kp DOT  &kp SLASH  &kp BSLH
-           &kp LCTRL   &kp LALT &kp LGUI &lt 1 LANGUAGE_1  &lt 2 SPACE  &lt 3 LANGUAGE_2    &kp BSPC  &lt 1 RET  &mo 3   &kp ESC
+           &kp LCTRL   &kp LALT &kp LGUI &lt 1 LANGUAGE_1  &lt 2 SPACE  &lt 3 LANGUAGE_2    &kp BSPC  &lt 1 RET &kp ESC &mo 3
             >;
         };
 
