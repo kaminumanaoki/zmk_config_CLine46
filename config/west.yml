@@ -22,7 +22,7 @@ manifest:
     # DYA Studio モジュール（すべて cormoran リポジトリ）
     - name: zmk-module-ble-management
       remote: cormoran
-      revision: main
+      revision: b5b388b1d99cef095143cf4a092de0185ca73e06
     - name: zmk-module-battery-history
       remote: cormoran
       revision: main
