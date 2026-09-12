@@ -2,6 +2,7 @@
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <input/processors.dtsi>
 #include <input/processors/runtime-input-processor.dtsi>
+#include <dt-bindings/zmk/runtime_input_processor.h>
 #include <behaviors/battery_history_request.dtsi>
 
 &default_transform {
@@ -78,8 +79,21 @@
             // <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,       //X軸反転
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,       //Y軸反転
             <&zip_xy_to_scroll_mapper>,                         //スクロールモードに変更
+            <&scroll_runtime_input_processor>,                  //Y軸優先・横スクロールの誤判定を抑制
             <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,   //スクロールのX軸反転
             //<&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,   //スクロールのY軸反転
             <&zip_scroll_scaler 1 8>;                           //スクロール量を1/8倍
     };
+};
+
+// スクロールは通常Y軸を優先し、X軸の入力が一定量続いた時だけ
+// 横スクロールを許可する。斜めに転がした時の誤判定を抑えつつ、
+// 明確な横移動は反応するための設定。
+&scroll_runtime_input_processor {
+    // 既存の zip_scroll_scaler 1/8 の速度を維持するため、ここでは倍率を変えない。
+    scale-multiplier = <1>;
+    scale-divisor = <1>;
+    axis-snap-mode = <AXIS_SNAP_MODE_Y>;
+    axis-snap-threshold = <60>;
+    axis-snap-timeout-ms = <600>;
 };
