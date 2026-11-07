@@ -80,7 +80,7 @@
         // Lang2(無変換)ホールド / Enterホールドで起動
         //
         // 左手:
-        //   Row0: ▽     F1       A+W+↑    A+W+↓    A+W+←    A+W+→
+        //   Row0: ▽     F1       A+W+←    A+W+→    A+W+←    A+W+→
         //   Row1: ▽     Ctrl+G   Alt+↑    Alt+↓    Win+←    Win+→
         //   Row2: ▽     Alt+F12  ←        ↓        Alt+←    Alt+→
         //
@@ -101,7 +101,7 @@
         // ================================================================
         layer_1 {
             bindings = <
-&trans  &kp F1       &kp LA(LG(UP))  &kp LA(LG(DOWN))  &kp LA(LG(LEFT))  &kp LA(LG(RIGHT))                      &kp LG(RBKT)   &kp LC(LA(RET))  &kp LC(LA(LEFT))  &kp LC(LA(RIGHT))  &kp LC(LA(UP))   &kp LC(LA(DOWN))
+&trans  &kp F1       &kp LA(LG(LEFT))  &kp LA(LG(RIGHT))  &kp LA(LG(LEFT))  &kp LA(LG(RIGHT))                      &kp LG(RBKT)   &kp LC(LA(RET))  &kp LC(LA(LEFT))  &kp LC(LA(RIGHT))  &kp LC(LA(UP))   &kp LC(LA(DOWN))
 &trans  &kp LC(G)    &kp LA(UP)      &kp LA(DOWN)       &kp LG(LEFT)      &kp LG(RIGHT)                          &kp LG(LBKT)   &mkp MB1         &kp UP            &mkp MB2           &kp LS(LG(N4))   &kp LC(LG(Q))
 &trans  &kp LA(F12)  &kp LEFT        &kp DOWN           &kp LA(LEFT)      &kp LA(RIGHT)                          &kp LC(UP)     &kp LEFT         &kp DOWN          &kp RIGHT          &trans           &trans
         &trans       &trans          &trans             &trans             &trans          &trans    &trans  &trans  &trans  &trans
